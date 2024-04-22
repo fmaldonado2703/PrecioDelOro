@@ -1,9 +1,9 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Precio Del Oro"
+author: "Grupo 2: Santiago Reyes, Francisco Santos, Fabian Maldonado"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Análsis de Series de Tiempo: Precio del Oro
 
