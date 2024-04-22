@@ -1,5 +1,15 @@
-análsis-de-series-de-tiempo-precio-del-oro
+data-set-seleccionado
+nombre-daily-gold-price-2014-2022-time-series-en-kaggle
+descripción
+rango-de-fechas01012014-05082022
+registros-2.227
+variables
+importancia
+relevancia-económica
+análisis-de-tendencias
+modelos-de-predicción
+investigación-académica
+granularidad-diaria
 capítulo-2
 capítulo-3
 capítulo-4
-que-es
