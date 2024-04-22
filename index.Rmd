@@ -36,10 +36,11 @@ Este Dataset contiene las siguientes variables:
 
 ## IMPORTANCIA:
 ### **Relevancia económica**: 
-El oro es un activo valioso y un indicador importante en los mercados financieros. Su precio afecta a la economía global, las inversiones y la inflación. Analizar su comportamiento a lo largo del tiempo puede proporcionar información valiosa para los inversionistas, Gobiernos y reservas de este insumo. 
+El oro ha sido una parte integral de la economía mundial durante milenios y sigue siendo relevante en la economía contemporánea por varias razones: El oro ha sido considerado tradicionalmente como una reserva de valor estable. A lo largo de la historia, ha conservado su valor mejor que muchas otras formas de inversión, lo que lo convierte en un refugio seguro en tiempos de incertidumbre económica, Los inversores y los bancos centrales a menudo mantienen oro como parte de una cartera diversificada. Dado que el oro tiene una correlación baja o negativa con otros activos. Además de su valor como inversión, el oro tiene numerosos usos industriales y tecnológicos. Se utiliza en la electrónica, la odontología, la medicina entre otros campos.  
+
 
 ### **Análisis de tendencias**: 
-Estudiar la serie temporal de precios del oro permite identificar patrones, tendencias en estados medios, subida y bajada. Se identifica gran información Histórica que puede ayudar a predecir futuros movimientos del mercado y tomar decisiones oportunas.
+Estudiar la serie temporal de precios del oro permite identificar cambios en el sentimiento económico y la confianza del mercado. Por ejemplo, un aumento en el precio del oro a menudo indica preocupaciones sobre la inflación, la inestabilidad geopolítica o la incertidumbre económica, Para los inversionistas, el oro puede servir como una forma de diversificar sus carteras y mitigar el riesgo. Estudiar las fluctuaciones en su precio les permite ajustar sus asignaciones de activos según las condiciones del mercado. Históricamente ha demostrado ser un activo que puede actuar como cobertura contra la inflación. Los bancos, en particular, pueden estudiar las fluctuaciones en el precio del oro para informar sus decisiones de política monetaria y de inversión. Las reservas de oro de un banco central pueden influir en su política monetaria y en su capacidad para estabilizar la moneda nacional. Por último, : Los movimientos extremos en el precio del oro a menudo pueden indicar riesgos sistémicos en la economía o en los mercados financieros.  
 
 ### **Modelos de predicción**: 
 Utilizando estos datos, se pueden construir modelos de predicción para estimar los precios futuros del oro y cambios importantes.  Se pueden aplicar modelos como: 
