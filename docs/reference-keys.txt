@@ -10,6 +10,6 @@ análisis-de-tendencias
 modelos-de-predicción
 investigación-académica
 granularidad-diaria
-capítulo-2
+propuesta-avance-2
 capítulo-3
 capítulo-4
