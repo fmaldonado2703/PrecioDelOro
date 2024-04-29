@@ -1,2 +1,8 @@
-# Capítulo 2
+# Propuesta Avance 2
+
+```{r}
+data = read.csv("Gold Price.csv")
+data
+```
+
 
