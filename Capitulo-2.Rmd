@@ -45,7 +45,7 @@ data_clean <- data %>% na.locf()
 
 head(data_clean)
 ```
-## Esploración de la data
+## Exploración de la data
 Para explorar la data debemos primero crear el objeto de serie de tiempo
 ```{r}
 # ts
@@ -55,7 +55,7 @@ autoplot()
 ```
 Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo
 
-## Descomponer
+## Descomposición
 Se realiza la descomposicion para validar la tendencia, estacionalidad.
 ```{r}
 data_decompose <- data_ts %>% 
@@ -66,7 +66,7 @@ data_decompose %>%
 ```
 en efecto se evidencia una tendencia lineal y adicionalmente hay un patron de estacionalidad en la data
 
-## Analisis de estacionalidad
+## Análisis de estacionalidad
 
 ```{r}
 data_decompose$seasonal %>% 

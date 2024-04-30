@@ -162,9 +162,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#cargar-la-data-del-data-set"><i class="fa fa-check"></i><b>2.2</b> Cargar la data del Data set</a></li>
 <li class="chapter" data-level="2.3" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#limpieza-de-datos"><i class="fa fa-check"></i><b>2.3</b> Limpieza de Datos</a></li>
 <li class="chapter" data-level="2.4" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#padding-imputation"><i class="fa fa-check"></i><b>2.4</b> Padding &amp; imputation</a></li>
-<li class="chapter" data-level="2.5" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#esploración-de-la-data"><i class="fa fa-check"></i><b>2.5</b> Esploración de la data</a></li>
-<li class="chapter" data-level="2.6" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#descomponer"><i class="fa fa-check"></i><b>2.6</b> Descomponer</a></li>
-<li class="chapter" data-level="2.7" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#analisis-de-estacionalidad"><i class="fa fa-check"></i><b>2.7</b> Analisis de estacionalidad</a></li>
+<li class="chapter" data-level="2.5" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#exploración-de-la-data"><i class="fa fa-check"></i><b>2.5</b> Exploración de la data</a></li>
+<li class="chapter" data-level="2.6" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#descomposición"><i class="fa fa-check"></i><b>2.6</b> Descomposición</a></li>
+<li class="chapter" data-level="2.7" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#análisis-de-estacionalidad"><i class="fa fa-check"></i><b>2.7</b> Análisis de estacionalidad</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="capítulo-3.html"><a href="capítulo-3.html"><i class="fa fa-check"></i><b>3</b> Capítulo 3</a></li>
 <li class="chapter" data-level="4" data-path="capítulo-4.html"><a href="capítulo-4.html"><i class="fa fa-check"></i><b>4</b> Capítulo 4</a></li>
@@ -263,32 +263,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 2014-01-05 29279 29279 29279 29279      0 -1.51
 ## 6 2014-01-06 29119 29300 29395 29051  24380 -0.55</code></pre>
 </div>
-<div id="esploración-de-la-data" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> Esploración de la data<a href="propuesta-avance-2.html#esploración-de-la-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exploración-de-la-data" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Exploración de la data<a href="propuesta-avance-2.html#exploración-de-la-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para explorar la data debemos primero crear el objeto de serie de tiempo</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="propuesta-avance-2.html#cb12-1" tabindex="-1"></a><span class="co"># ts</span></span>
 <span id="cb12-2"><a href="propuesta-avance-2.html#cb12-2" tabindex="-1"></a>data_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> data_clean<span class="sc">$</span>Price, <span class="at">start =</span> <span class="dv">2014</span>, <span class="at">frequency =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">4</span><span class="sc">*</span><span class="dv">12</span>)</span>
 <span id="cb12-3"><a href="propuesta-avance-2.html#cb12-3" tabindex="-1"></a>data_ts <span class="sc">%&gt;%</span> </span>
 <span id="cb12-4"><a href="propuesta-avance-2.html#cb12-4" tabindex="-1"></a><span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo</p>
 </div>
-<div id="descomponer" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Descomponer<a href="propuesta-avance-2.html#descomponer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="descomposición" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Descomposición<a href="propuesta-avance-2.html#descomposición" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se realiza la descomposicion para validar la tendencia, estacionalidad.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="propuesta-avance-2.html#cb13-1" tabindex="-1"></a>data_decompose <span class="ot">&lt;-</span> data_ts <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="propuesta-avance-2.html#cb13-2" tabindex="-1"></a>  <span class="fu">decompose</span>(<span class="at">type =</span> <span class="st">&quot;multiplicative&quot;</span>)</span>
 <span id="cb13-3"><a href="propuesta-avance-2.html#cb13-3" tabindex="-1"></a>  </span>
 <span id="cb13-4"><a href="propuesta-avance-2.html#cb13-4" tabindex="-1"></a>data_decompose <span class="sc">%&gt;%</span> </span>
 <span id="cb13-5"><a href="propuesta-avance-2.html#cb13-5" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 en efecto se evidencia una tendencia lineal y adicionalmente hay un patron de estacionalidad en la data</p>
 </div>
-<div id="analisis-de-estacionalidad" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Analisis de estacionalidad<a href="propuesta-avance-2.html#analisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="análisis-de-estacionalidad" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Análisis de estacionalidad<a href="propuesta-avance-2.html#análisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="propuesta-avance-2.html#cb14-1" tabindex="-1"></a>data_decompose<span class="sc">$</span>seasonal <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="propuesta-avance-2.html#cb14-2" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="propuesta-avance-2.html#cb15-1" tabindex="-1"></a>data_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="propuesta-avance-2.html#cb15-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">month</span>(Date, <span class="at">label =</span> T)) <span class="sc">%&gt;%</span> </span>
@@ -298,7 +298,7 @@ Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021<
 <span id="cb15-6"><a href="propuesta-avance-2.html#cb15-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Month, total)) <span class="sc">+</span></span>
 <span id="cb15-7"><a href="propuesta-avance-2.html#cb15-7" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
 <span id="cb15-8"><a href="propuesta-avance-2.html#cb15-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 Los precios de oro tienden a ser mas altos entre enero a Julio, mierntas que agosto a diciembre el precio baja.</p>
 
 </div>
