@@ -156,7 +156,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6.5" data-path="index.html"><a href="index.html#granularidad-diaria"><i class="fa fa-check"></i><b>1.6.5</b> <strong>Granularidad diaria</strong>:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html"><i class="fa fa-check"></i><b>2</b> Propuesta Avance 2</a></li>
+<li class="chapter" data-level="2" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html"><i class="fa fa-check"></i><b>2</b> Propuesta Avance 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#cargar-librerias-a-usar"><i class="fa fa-check"></i><b>2.1</b> Cargar Librerias a usar</a></li>
+<li class="chapter" data-level="2.2" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#cargar-la-data-del-data-set"><i class="fa fa-check"></i><b>2.2</b> Cargar la data del Data set</a></li>
+<li class="chapter" data-level="2.3" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#limpieza-de-datos"><i class="fa fa-check"></i><b>2.3</b> Limpieza de Datos</a></li>
+<li class="chapter" data-level="2.4" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#padding-imputation"><i class="fa fa-check"></i><b>2.4</b> Padding &amp; imputation</a></li>
+<li class="chapter" data-level="2.5" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#esploración-de-la-data"><i class="fa fa-check"></i><b>2.5</b> Esploración de la data</a></li>
+<li class="chapter" data-level="2.6" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#descomponer"><i class="fa fa-check"></i><b>2.6</b> Descomponer</a></li>
+<li class="chapter" data-level="2.7" data-path="propuesta-avance-2.html"><a href="propuesta-avance-2.html#analisis-de-estacionalidad"><i class="fa fa-check"></i><b>2.7</b> Analisis de estacionalidad</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="capítulo-3.html"><a href="capítulo-3.html"><i class="fa fa-check"></i><b>3</b> Capítulo 3</a></li>
 <li class="chapter" data-level="4" data-path="capítulo-4.html"><a href="capítulo-4.html"><i class="fa fa-check"></i><b>4</b> Capítulo 4</a></li>
 <li class="divider"></li>
@@ -180,153 +189,119 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="propuesta-avance-2" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Capítulo 2</span> Propuesta Avance 2<a href="propuesta-avance-2.html#propuesta-avance-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="propuesta-avance-2.html#cb1-1" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;Gold Price.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="propuesta-avance-2.html#cb1-2" tabindex="-1"></a>data</span></code></pre></div>
-<pre><code>##           Date Price  Open  High   Low Volume  Chg.
-## 1   2014-01-01 29542 29435 29598 29340   2930  0.25
-## 2   2014-01-02 29975 29678 30050 29678   3140  1.47
-## 3   2014-01-03 29727 30031 30125 29539   3050 -0.83
-## 4   2014-01-04 29279 29279 29279 29279      0 -1.51
-## 5   2014-01-06 29119 29300 29395 29051  24380 -0.55
-## 6   2014-01-07 28959 29130 29195 28912  18710 -0.55
-## 7   2014-01-08 28934 28916 29029 28820  18140 -0.09
-## 8   2014-01-09 28997 28990 29053 28865  15130  0.22
-## 9   2014-01-10 29169 29030 29198 28960  15810  0.59
-## 10  2014-01-13 29312 29170 29330 29133  13780  0.49
-## 11  2014-01-14 29198 29289 29390 29155  10600 -0.39
-## 12  2014-01-15 29150 29161 29180 29002  13980 -0.16
-## 13  2014-01-16 29168 29165 29250 29090  12580  0.06
-## 14  2014-01-17 29385 29132 29415 29054  17640  0.74
-## 15  2014-01-20 29414 29410 29499 29392   9440  0.10
-## 16  2014-01-21 29362 29392 29411 29256  18210 -0.18
-## 17  2014-01-22 29269 29354 29426 29234  14900 -0.32
-## 18  2014-01-23 29394 29230 29468 29116  30840  0.43
-## 19  2014-01-24 29574 29399 29696 29345  20390  0.61
-## 20  2014-01-27 29905 29682 29929 29682  22120  1.12
-## 21  2014-01-28 29628 29871 29871 29586  18130 -0.93
-## 22  2014-01-29 29835 29570 29890 29479  18140  0.70
-## 23  2014-01-30 29499 29849 29913 29470  15910 -1.13
-## 24  2014-01-31 29482 29481 29679 29355  15200 -0.06
-## 25  2014-02-03 29789 29502 29850 29402  11760  1.04
-## 26  2014-02-04 29534 29722 29821 29520   3160 -0.86
-## 27  2014-02-05 29719 29515 30100 29515   4490  0.63
-## 28  2014-02-06 29231 29273 29448 29211  18560 -1.64
-## 29  2014-02-07 29310 29259 29440 29259  14620  0.27
-## 30  2014-02-10 29471 29349 29549 29349  11910  0.55
-## 31  2014-02-11 29670 29500 29700 29500  14740  0.68
-## 32  2014-02-12 29698 29650 29724 29580  10770  0.09
-## 33  2014-02-13 29726 29660 29748 29605  12470  0.09
-## 34  2014-02-14 29932 29750 29949 29750  11850  0.69
-## 35  2014-02-17 30664 29978 30731 29970  27800  2.45
-## 36  2014-02-18 30766 30600 30790 30511  18180  0.33
-## 37  2014-02-19 30712 30686 30865 30405  20720 -0.18
-## 38  2014-02-20 30608 30680 30680 30507  12460 -0.34
-## 39  2014-02-21 30677 30590 30749 30522  12330  0.23
-## 40  2014-02-24 30927 30633 30975 30633  12900  0.81
-## 41  2014-02-25 30972 30929 30999 30817  12760  0.15
-## 42  2014-02-26 30810 30951 30969 30677  14740 -0.52
-## 43  2014-02-27 30839 30884 30917 30788   4410  0.09
-## 44  2014-02-28 30634 30820 30895 30567  16200 -0.66
-## 45  2014-03-03 32051 30700 32279 30700   5670  4.63
-## 46  2014-03-04 31126 31500 32379 31090   1310 -2.89
-## 47  2014-03-05 32351 31200 32500 30770   1490  3.94
-## 48  2014-03-06 30416 30350 30446 30105  21500 -5.98
-## 49  2014-03-07 30307 30361 30514 30130  19380 -0.36
-## 50  2014-03-10 30327 30253 30350 30145  13500  0.07
-## 51  2014-03-11 30421 30301 30515 30166  23170  0.31
-## 52  2014-03-12 30627 30468 30690 30468  19020  0.68
-## 53  2014-03-13 30697 30677 30735 30492  15380  0.23
-## 54  2014-03-14 30719 30730 30849 30610  19040  0.07
-## 55  2014-03-17 30557 30699 30710 30525   5190 -0.53
-## 56  2014-03-18 30389 30511 30511 30311  15940 -0.55
-## 57  2014-03-19 30169 30392 30416 30122  13680 -0.72
-## 58  2014-03-20 29924 30110 30168 29885  14010 -0.81
-## 59  2014-03-21 29850 29893 30038 29817  11960 -0.25
-## 60  2014-03-24 29182 29810 29810 29141  18000 -2.24
-## 61  2014-03-25 28971 29230 29317 28931  20330 -0.72
-## 62  2014-03-26 28595 29020 29043 28335  16650 -1.30
-## 63  2014-03-27 28521 28631 28740 28351  17230 -0.26
-## 64  2014-03-28 28434 28488 28630 28213  18090 -0.31
-## 65  2014-03-31 28470 28427 28778 28340  12650  0.13
-## 66  2014-04-01 28116 28432 28507 28058   8840 -1.24
-## 67  2014-04-02 28404 28035 28470 27361    480  1.02
-## 68  2014-04-03 28460 28500 28699 28365    110  0.20
-## 69  2014-04-04 28519 28400 28885 28400    190  0.21
-## 70  2014-04-05 28549 28549 28549 28549      0  0.11
-## 71  2014-04-07 28574 28599 28643 28481  10450  0.09
-## 72  2014-04-08 28754 28639 28842 28639   5740  0.63
-## 73  2014-04-09 28710 28754 28856 28653  12120 -0.15
-## 74  2014-04-10 29094 28757 29119 28757  13700  1.34
-## 75  2014-04-11 29085 29090 29162 28973  10530 -0.03
-## 76  2014-04-14 29350 29095 29371 29095   6090  0.91
-## 77  2014-04-15 29342 29287 29395 29059  21410 -0.03
-## 78  2014-04-16 29290 29280 29320 28900  16580 -0.18
-## 79  2014-04-17 29293 29256 29386 29185  10460  0.01
-## 80  2014-04-19 29339 29339 29339 29339      0  0.16
-## 81  2014-04-21 29548 29207 29599 29072  13860  0.71
-## 82  2014-04-22 29423 29550 29649 29381  11700 -0.42
-## 83  2014-04-23 29752 29480 29775 29433   9860  1.12
-## 84  2014-04-25 29741 29750 29939 29650  10180 -0.04
-## 85  2014-04-27 29695 29695 29695 29695      0 -0.15
-## 86  2014-04-28 29824 29895 29900 29756   6680  0.43
-## 87  2014-04-29 29713 29786 29799 29607   6760 -0.37
-## 88  2014-04-30 31014 29602 31495 29571  12250  4.38
-## 89  2014-05-01 30380 31033 31743 29914   2850 -2.04
-## 90  2014-05-02 30182 30388 30440 30080    930 -0.65
-## 91  2014-05-05 29967 30211 30347 29834   1040 -0.71
-## 92  2014-05-06 29109 29187 29231 29081   9330 -2.86
-## 93  2014-05-07 28747 29164 29275 28725  15480 -1.24
-## 94  2014-05-08 28734 28787 28846 28665   9560 -0.05
-## 95  2014-05-09 28741 28677 28877 28673  10090  0.02
-## 96  2014-05-12 28860 28732 29025 28575  14220  0.41
-## 97  2014-05-13 28673 28787 28874 28633  12740 -0.65
-## 98  2014-05-14 28911 28769 28960 28769   7410  0.83
-## 99  2014-05-15 28624 28882 28882 28575  14660 -0.99
-## 100 2014-05-16 28322 28575 28575 28251  11490 -1.06
-## 101 2014-05-19 28336 28275 28475 28233  11590  0.05
-## 102 2014-05-20 28424 28291 28460 28253  15280  0.31
-## 103 2014-05-21 27501 28445 28540 27432  31580 -3.25
-## 104 2014-05-22 27386 27504 27640 27252  24650 -0.42
-## 105 2014-05-23 27528 27400 27584 27281  13710  0.52
-## 106 2014-05-26 27586 27544 27620 27421  11500  0.21
-## 107 2014-05-27 27087 27567 27598 27010  19860 -1.81
-## 108 2014-05-28 26987 27032 27100 26853  15200 -0.37
-## 109 2014-05-29 26984 26945 27083 26661  18000 -0.01
-## 110 2014-05-30 27151 26915 27215 26862  12890  0.62
-## 111 2014-06-02 26626 27012 27130 26520   2920 -1.93
-## 112 2014-06-03 26732 26756 26874 26592    450  0.40
-## 113 2014-06-04 26708 26582 26910 26582    130 -0.09
-## 114 2014-06-05 26771 26800 26860 26605     70  0.24
-## 115 2014-06-06 26400 26548 26600 26350  11550 -1.39
-## 116 2014-06-09 26545 26400 26570 26278   8470  0.55
-## 117 2014-06-10 26712 26585 26738 26475  11670  0.63
-## 118 2014-06-11 26736 26720 26780 26527  13560  0.09
-## 119 2014-06-12 27014 26740 27050 26640  14160  1.04
-## 120 2014-06-13 27235 27020 27289 26988  10270  0.82
-## 121 2014-06-16 27395 27255 27644 27255  12660  0.59
-## 122 2014-06-17 27418 27306 27488 27135  13700  0.08
-## 123 2014-06-18 27353 27351 27538 27230  14470 -0.24
-## 124 2014-06-19 28160 27313 28199 27313  21910  2.95
-## 125 2014-06-20 28154 28150 28349 27977  18080 -0.02
-## 126 2014-06-23 28111 28245 28267 28035  12310 -0.15
-## 127 2014-06-24 28167 28099 28369 27860  17400  0.20
-## 128 2014-06-25 28221 28121 28290 28057  14010  0.19
-## 129 2014-06-26 28126 28190 28208 27935  17380 -0.34
-## 130 2014-06-27 28063 28201 28236 28005   9920 -0.22
-## 131 2014-06-30 28076 28000 28185 27967   8760  0.05
-## 132 2014-07-01 27975 28210 28277 27950   4410 -0.36
-## 133 2014-07-02 27788 27950 28225 27750   2880 -0.67
-## 134 2014-07-03 27802 27552 27900 27552   1200  0.05
-## 135 2014-07-04 27913 27884 27975 27755    260  0.40
-## 136 2014-07-07 27564 27611 27611 27455  11210 -1.25
-## 137 2014-07-08 27594 27582 27725 27460  15210  0.11
-## 138 2014-07-09 27667 27620 27771 27612  11340  0.26
-## 139 2014-07-10 28565 27650 28649 27560  40700  3.25
-## 140 2014-07-11 28441 28517 28579 28302  15110 -0.43
-## 141 2014-07-12 28413 28413 28413 28413      0 -0.10
-## 142 2014-07-13 28413 28413 28413 28413      0  0.00
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 2085 rows ]</code></pre>
+<div id="cargar-librerias-a-usar" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Cargar Librerias a usar<a href="propuesta-avance-2.html#cargar-librerias-a-usar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="propuesta-avance-2.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb1-2"><a href="propuesta-avance-2.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(forecast) </span>
+<span id="cb1-3"><a href="propuesta-avance-2.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(MLmetrics) </span>
+<span id="cb1-4"><a href="propuesta-avance-2.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(tseries) </span>
+<span id="cb1-5"><a href="propuesta-avance-2.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(TSstudio) </span>
+<span id="cb1-6"><a href="propuesta-avance-2.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(padr) </span>
+<span id="cb1-7"><a href="propuesta-avance-2.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(imputeTS)</span>
+<span id="cb1-8"><a href="propuesta-avance-2.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-9"><a href="propuesta-avance-2.html#cb1-9" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-10"><a href="propuesta-avance-2.html#cb1-10" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code></pre></div>
+</div>
+<div id="cargar-la-data-del-data-set" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Cargar la data del Data set<a href="propuesta-avance-2.html#cargar-la-data-del-data-set" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="propuesta-avance-2.html#cb2-1" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;Gold Price.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="propuesta-avance-2.html#cb2-2" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##         Date Price  Open  High   Low Volume  Chg.
+## 1 2014-01-01 29542 29435 29598 29340   2930  0.25
+## 2 2014-01-02 29975 29678 30050 29678   3140  1.47
+## 3 2014-01-03 29727 30031 30125 29539   3050 -0.83
+## 4 2014-01-04 29279 29279 29279 29279      0 -1.51
+## 5 2014-01-06 29119 29300 29395 29051  24380 -0.55
+## 6 2014-01-07 28959 29130 29195 28912  18710 -0.55</code></pre>
+</div>
+<div id="limpieza-de-datos" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Limpieza de Datos<a href="propuesta-avance-2.html#limpieza-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="propuesta-avance-2.html#cb4-1" tabindex="-1"></a><span class="co"># Validar los tipos de datos de cada Columna</span></span>
+<span id="cb4-2"><a href="propuesta-avance-2.html#cb4-2" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2227 obs. of  7 variables:
+##  $ Date  : chr  &quot;2014-01-01&quot; &quot;2014-01-02&quot; &quot;2014-01-03&quot; &quot;2014-01-04&quot; ...
+##  $ Price : int  29542 29975 29727 29279 29119 28959 28934 28997 29169 29312 ...
+##  $ Open  : int  29435 29678 30031 29279 29300 29130 28916 28990 29030 29170 ...
+##  $ High  : int  29598 30050 30125 29279 29395 29195 29029 29053 29198 29330 ...
+##  $ Low   : int  29340 29678 29539 29279 29051 28912 28820 28865 28960 29133 ...
+##  $ Volume: int  2930 3140 3050 0 24380 18710 18140 15130 15810 13780 ...
+##  $ Chg.  : num  0.25 1.47 -0.83 -1.51 -0.55 -0.55 -0.09 0.22 0.59 0.49 ...</code></pre>
+<p>La columna “Date” está en tipo “character”, por lo tanto toca convertir esta en formato de Tiempo</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="propuesta-avance-2.html#cb6-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="propuesta-avance-2.html#cb6-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">ymd</span>(Date))</span>
+<span id="cb6-3"><a href="propuesta-avance-2.html#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="propuesta-avance-2.html#cb6-4" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2227 obs. of  7 variables:
+##  $ Date  : Date, format: &quot;2014-01-01&quot; &quot;2014-01-02&quot; &quot;2014-01-03&quot; &quot;2014-01-04&quot; ...
+##  $ Price : int  29542 29975 29727 29279 29119 28959 28934 28997 29169 29312 ...
+##  $ Open  : int  29435 29678 30031 29279 29300 29130 28916 28990 29030 29170 ...
+##  $ High  : int  29598 30050 30125 29279 29395 29195 29029 29053 29198 29330 ...
+##  $ Low   : int  29340 29678 29539 29279 29051 28912 28820 28865 28960 29133 ...
+##  $ Volume: int  2930 3140 3050 0 24380 18710 18140 15130 15810 13780 ...
+##  $ Chg.  : num  0.25 1.47 -0.83 -1.51 -0.55 -0.55 -0.09 0.22 0.59 0.49 ...</code></pre>
+<p>Todas las columnas se encuentran en el tipo correcto.</p>
+</div>
+<div id="padding-imputation" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Padding &amp; imputation<a href="propuesta-avance-2.html#padding-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Si observamos la data solo comprende fechas entre semana, pero en series de tiempo deberiamos tener la data mas completa en la medida de lo posible.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="propuesta-avance-2.html#cb8-1" tabindex="-1"></a><span class="co">#Padding</span></span>
+<span id="cb8-2"><a href="propuesta-avance-2.html#cb8-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="propuesta-avance-2.html#cb8-3" tabindex="-1"></a>  <span class="fu">pad</span>(<span class="at">interval =</span> <span class="st">&quot;day&quot;</span>) </span>
+<span id="cb8-4"><a href="propuesta-avance-2.html#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="propuesta-avance-2.html#cb8-5" tabindex="-1"></a><span class="co"># imputar NA values con la ultima observacion</span></span>
+<span id="cb8-6"><a href="propuesta-avance-2.html#cb8-6" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">na.locf</span>()</span></code></pre></div>
+<pre><code>## Warning in na.locf(.): na.locf will be replaced by na_locf.
+##     Functionality stays the same.
+##     The new function name better fits modern R code style guidelines.
+##     Please adjust your code accordingly.</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="propuesta-avance-2.html#cb10-1" tabindex="-1"></a><span class="fu">head</span>(data_clean)</span></code></pre></div>
+<pre><code>##         Date Price  Open  High   Low Volume  Chg.
+## 1 2014-01-01 29542 29435 29598 29340   2930  0.25
+## 2 2014-01-02 29975 29678 30050 29678   3140  1.47
+## 3 2014-01-03 29727 30031 30125 29539   3050 -0.83
+## 4 2014-01-04 29279 29279 29279 29279      0 -1.51
+## 5 2014-01-05 29279 29279 29279 29279      0 -1.51
+## 6 2014-01-06 29119 29300 29395 29051  24380 -0.55</code></pre>
+</div>
+<div id="esploración-de-la-data" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Esploración de la data<a href="propuesta-avance-2.html#esploración-de-la-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para explorar la data debemos primero crear el objeto de serie de tiempo</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="propuesta-avance-2.html#cb12-1" tabindex="-1"></a><span class="co"># ts</span></span>
+<span id="cb12-2"><a href="propuesta-avance-2.html#cb12-2" tabindex="-1"></a>data_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> data_clean<span class="sc">$</span>Price, <span class="at">start =</span> <span class="dv">2014</span>, <span class="at">frequency =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">4</span><span class="sc">*</span><span class="dv">12</span>)</span>
+<span id="cb12-3"><a href="propuesta-avance-2.html#cb12-3" tabindex="-1"></a>data_ts <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="propuesta-avance-2.html#cb12-4" tabindex="-1"></a><span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo</p>
+</div>
+<div id="descomponer" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Descomponer<a href="propuesta-avance-2.html#descomponer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se realiza la descomposicion para validar la tendencia, estacionalidad.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="propuesta-avance-2.html#cb13-1" tabindex="-1"></a>data_decompose <span class="ot">&lt;-</span> data_ts <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="propuesta-avance-2.html#cb13-2" tabindex="-1"></a>  <span class="fu">decompose</span>(<span class="at">type =</span> <span class="st">&quot;multiplicative&quot;</span>)</span>
+<span id="cb13-3"><a href="propuesta-avance-2.html#cb13-3" tabindex="-1"></a>  </span>
+<span id="cb13-4"><a href="propuesta-avance-2.html#cb13-4" tabindex="-1"></a>data_decompose <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="propuesta-avance-2.html#cb13-5" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+en efecto se evidencia una tendencia lineal y adicionalmente hay un patron de estacionalidad en la data</p>
+</div>
+<div id="analisis-de-estacionalidad" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Analisis de estacionalidad<a href="propuesta-avance-2.html#analisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="propuesta-avance-2.html#cb14-1" tabindex="-1"></a>data_decompose<span class="sc">$</span>seasonal <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="propuesta-avance-2.html#cb14-2" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="propuesta-avance-2.html#cb15-1" tabindex="-1"></a>data_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="propuesta-avance-2.html#cb15-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">month</span>(Date, <span class="at">label =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="propuesta-avance-2.html#cb15-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seasons =</span> data_decompose<span class="sc">$</span>seasonal) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="propuesta-avance-2.html#cb15-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="propuesta-avance-2.html#cb15-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(seasons)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb15-6"><a href="propuesta-avance-2.html#cb15-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Month, total)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="propuesta-avance-2.html#cb15-7" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb15-8"><a href="propuesta-avance-2.html#cb15-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+Los precios de oro tienden a ser mas altos entre enero a Julio, mierntas que agosto a diciembre el precio baja.</p>
 
+</div>
 </div>
             </section>
 

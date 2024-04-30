@@ -11,5 +11,12 @@ modelos-de-predicción
 investigación-académica
 granularidad-diaria
 propuesta-avance-2
+cargar-librerias-a-usar
+cargar-la-data-del-data-set
+limpieza-de-datos
+padding-imputation
+esploración-de-la-data
+descomponer
+analisis-de-estacionalidad
 capítulo-3
 capítulo-4
