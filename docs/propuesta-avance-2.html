@@ -270,35 +270,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-2"><a href="propuesta-avance-2.html#cb12-2" tabindex="-1"></a>data_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> data_clean<span class="sc">$</span>Price, <span class="at">start =</span> <span class="dv">2014</span>, <span class="at">frequency =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">4</span><span class="sc">*</span><span class="dv">12</span>)</span>
 <span id="cb12-3"><a href="propuesta-avance-2.html#cb12-3" tabindex="-1"></a>data_ts <span class="sc">%&gt;%</span> </span>
 <span id="cb12-4"><a href="propuesta-avance-2.html#cb12-4" tabindex="-1"></a><span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+Se observa un comportamiento INCREMENTAL a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="propuesta-avance-2.html#cb13-1" tabindex="-1"></a><span class="co"># Calcular el promedio móvil</span></span>
+<span id="cb13-2"><a href="propuesta-avance-2.html#cb13-2" tabindex="-1"></a>promedio_movil <span class="ot">&lt;-</span> <span class="fu">ma</span>(data_ts, <span class="at">order =</span> <span class="dv">12</span>)  <span class="co"># Cambia el valor de &#39;order&#39; según tus necesidades</span></span>
+<span id="cb13-3"><a href="propuesta-avance-2.html#cb13-3" tabindex="-1"></a><span class="co"># Graficar la serie de tiempo y el promedio móvil por separado</span></span>
+<span id="cb13-4"><a href="propuesta-avance-2.html#cb13-4" tabindex="-1"></a><span class="fu">autoplot</span>(data_ts) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Serie de Tiempo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="propuesta-avance-2.html#cb13-5" tabindex="-1"></a>  <span class="fu">autolayer</span>(promedio_movil, <span class="at">series =</span> <span class="st">&quot;Promedio Móvil&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 12 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Se puede apreciar que el promedio movil, sigue de cerca a la serie temporal indidcando que hay poco ruido en la variable y que se sigue una tendencia clara.</p>
 </div>
 <div id="descomposición" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> Descomposición<a href="propuesta-avance-2.html#descomposición" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se realiza la descomposicion para validar la tendencia, estacionalidad.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="propuesta-avance-2.html#cb13-1" tabindex="-1"></a>data_decompose <span class="ot">&lt;-</span> data_ts <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="propuesta-avance-2.html#cb13-2" tabindex="-1"></a>  <span class="fu">decompose</span>(<span class="at">type =</span> <span class="st">&quot;multiplicative&quot;</span>)</span>
-<span id="cb13-3"><a href="propuesta-avance-2.html#cb13-3" tabindex="-1"></a>  </span>
-<span id="cb13-4"><a href="propuesta-avance-2.html#cb13-4" tabindex="-1"></a>data_decompose <span class="sc">%&gt;%</span> </span>
-<span id="cb13-5"><a href="propuesta-avance-2.html#cb13-5" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="propuesta-avance-2.html#cb15-1" tabindex="-1"></a>data_decompose <span class="ot">&lt;-</span> data_ts <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="propuesta-avance-2.html#cb15-2" tabindex="-1"></a>  <span class="fu">decompose</span>(<span class="at">type =</span> <span class="st">&quot;multiplicative&quot;</span>)</span>
+<span id="cb15-3"><a href="propuesta-avance-2.html#cb15-3" tabindex="-1"></a>  </span>
+<span id="cb15-4"><a href="propuesta-avance-2.html#cb15-4" tabindex="-1"></a>data_decompose <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="propuesta-avance-2.html#cb15-5" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 en efecto se evidencia una tendencia lineal y adicionalmente hay un patron de estacionalidad en la data</p>
 </div>
 <div id="análisis-de-estacionalidad" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Análisis de estacionalidad<a href="propuesta-avance-2.html#análisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="propuesta-avance-2.html#cb14-1" tabindex="-1"></a>data_decompose<span class="sc">$</span>seasonal <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="propuesta-avance-2.html#cb14-2" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="propuesta-avance-2.html#cb16-1" tabindex="-1"></a>data_decompose<span class="sc">$</span>seasonal <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="propuesta-avance-2.html#cb16-2" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="propuesta-avance-2.html#cb15-1" tabindex="-1"></a>data_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="propuesta-avance-2.html#cb15-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">month</span>(Date, <span class="at">label =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="propuesta-avance-2.html#cb15-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seasons =</span> data_decompose<span class="sc">$</span>seasonal) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="propuesta-avance-2.html#cb15-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="propuesta-avance-2.html#cb15-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(seasons)) <span class="sc">%&gt;%</span>   </span>
-<span id="cb15-6"><a href="propuesta-avance-2.html#cb15-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Month, total)) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="propuesta-avance-2.html#cb15-7" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
-<span id="cb15-8"><a href="propuesta-avance-2.html#cb15-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="propuesta-avance-2.html#cb17-1" tabindex="-1"></a>data_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="propuesta-avance-2.html#cb17-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">month</span>(Date, <span class="at">label =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="propuesta-avance-2.html#cb17-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seasons =</span> data_decompose<span class="sc">$</span>seasonal) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="propuesta-avance-2.html#cb17-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-5"><a href="propuesta-avance-2.html#cb17-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(seasons)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb17-6"><a href="propuesta-avance-2.html#cb17-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Month, total)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="propuesta-avance-2.html#cb17-7" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb17-8"><a href="propuesta-avance-2.html#cb17-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 Los precios de oro tienden a ser mas altos entre enero a Julio, mierntas que agosto a diciembre el precio baja.</p>
 
 </div>
