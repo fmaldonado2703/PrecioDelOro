@@ -232,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-3"><a href="propuesta-avance-2.html#cb6-3" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="propuesta-avance-2.html#cb6-4" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    2227 obs. of  7 variables:
-##  $ Date  : Date, format: &quot;2014-01-01&quot; &quot;2014-01-02&quot; &quot;2014-01-03&quot; &quot;2014-01-04&quot; ...
+##  $ Date  : Date, format: &quot;2014-01-01&quot; &quot;2014-01-02&quot; &quot;2014-01-03&quot; ...
 ##  $ Price : int  29542 29975 29727 29279 29119 28959 28934 28997 29169 29312 ...
 ##  $ Open  : int  29435 29678 30031 29279 29300 29130 28916 28990 29030 29170 ...
 ##  $ High  : int  29598 30050 30125 29279 29395 29195 29029 29053 29198 29330 ...
@@ -250,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-4"><a href="propuesta-avance-2.html#cb8-4" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="propuesta-avance-2.html#cb8-5" tabindex="-1"></a><span class="co"># imputar NA values con la ultima observacion</span></span>
 <span id="cb8-6"><a href="propuesta-avance-2.html#cb8-6" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">na.locf</span>()</span></code></pre></div>
-<pre><code>## Warning in na.locf(.): na.locf will be replaced by na_locf.
+<pre><code>## Warning: na.locf will be replaced by na_locf.
 ##     Functionality stays the same.
 ##     The new function name better fits modern R code style guidelines.
 ##     Please adjust your code accordingly.</code></pre>
@@ -270,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-2"><a href="propuesta-avance-2.html#cb12-2" tabindex="-1"></a>data_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> data_clean<span class="sc">$</span>Price, <span class="at">start =</span> <span class="dv">2014</span>, <span class="at">frequency =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">4</span><span class="sc">*</span><span class="dv">12</span>)</span>
 <span id="cb12-3"><a href="propuesta-avance-2.html#cb12-3" tabindex="-1"></a>data_ts <span class="sc">%&gt;%</span> </span>
 <span id="cb12-4"><a href="propuesta-avance-2.html#cb12-4" tabindex="-1"></a><span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo</p>
 </div>
 <div id="descomposición" class="section level2 hasAnchor" number="2.6">
@@ -281,14 +281,14 @@ Se observa un comportamiento incremental a traves del tiempo y adicionalmente se
 <span id="cb13-3"><a href="propuesta-avance-2.html#cb13-3" tabindex="-1"></a>  </span>
 <span id="cb13-4"><a href="propuesta-avance-2.html#cb13-4" tabindex="-1"></a>data_decompose <span class="sc">%&gt;%</span> </span>
 <span id="cb13-5"><a href="propuesta-avance-2.html#cb13-5" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 en efecto se evidencia una tendencia lineal y adicionalmente hay un patron de estacionalidad en la data</p>
 </div>
 <div id="análisis-de-estacionalidad" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Análisis de estacionalidad<a href="propuesta-avance-2.html#análisis-de-estacionalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="propuesta-avance-2.html#cb14-1" tabindex="-1"></a>data_decompose<span class="sc">$</span>seasonal <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="propuesta-avance-2.html#cb14-2" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="propuesta-avance-2.html#cb15-1" tabindex="-1"></a>data_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="propuesta-avance-2.html#cb15-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">month</span>(Date, <span class="at">label =</span> T)) <span class="sc">%&gt;%</span> </span>
@@ -298,7 +298,7 @@ Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021<
 <span id="cb15-6"><a href="propuesta-avance-2.html#cb15-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Month, total)) <span class="sc">+</span></span>
 <span id="cb15-7"><a href="propuesta-avance-2.html#cb15-7" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
 <span id="cb15-8"><a href="propuesta-avance-2.html#cb15-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 Los precios de oro tienden a ser mas altos entre enero a Julio, mierntas que agosto a diciembre el precio baja.</p>
 
 </div>

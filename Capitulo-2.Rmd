@@ -55,6 +55,15 @@ autoplot()
 ```
 Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo
 
+```{r}
+# Calcular el promedio móvil
+promedio_movil <- ma(data_ts, order = 12)  # Cambia el valor de 'order' según tus necesidades
+# Graficar la serie de tiempo y el promedio móvil por separado
+autoplot(data_ts) + ggtitle("Serie de Tiempo") +
+  autolayer(promedio_movil, series = "Promedio Móvil", col = "red")
+```
+
+Se puede apreciar que el promedio movil, sigue de cerca a la serie temporal indidcando que hay poco ruido en la variable y que se sigue una tendencia clara.
 ## Descomposición
 Se realiza la descomposicion para validar la tendencia, estacionalidad.
 ```{r}

@@ -1,0 +1,173 @@
+--- 
+title: "Precio Del Oro"
+author: "Grupo 2: Santiago Reyes, Francisco Santos, Fabian Maldonado"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+---
+
+# DATA SET SELECCIONADO
+## NOMBRE: Daily Gold Price (2014-2022) Time Series en Kaggle
+
+## DESCRIPCIÓN:
+Conjunto de datos proporciona los precios diarios del oro desde 2015 hasta 2021. Cada entrada incluye la fecha y el precio del oro en dólares estadounidenses (USD).
+
+## RANGO DE FECHAS:01/01/2014-05/08/2022
+
+## REGISTROS: 2.227
+
+## VARIABLES:
+Este Dataset contiene las siguientes variables:  
+
+•	**Fecha (Date)**: Representa la fecha en la que se registró el precio del oro. Por ejemplo, “24 de abril de 2015”.  
+
+•	**Precio del oro (Price)**: Indica el valor del oro en dólares estadounidenses (USD) para esa fecha específica. Por ejemplo, “1,200 USD”.  
+
+•	**Precio de apertura (Open)**: Corresponde al precio del oro al inicio del período de negociación. Por ejemplo, “1,180 USD”.  
+
+•	**Precio máximo (High)**: Es el precio más alto alcanzado por el oro durante el día. Por ejemplo, “1,220 USD”.  
+
+•	**Precio mínimo (Low)**: Representa el precio más bajo registrado para el oro durante el día. Por ejemplo, “1,150 USD”.  
+
+•	**Volumen (Volume)**: Indica la cantidad total de oro negociada en ese día. Por ejemplo, “10,000 onzas”.  
+
+•	**Variación porcentual (Chg%)**: Muestra el cambio porcentual en el precio del oro con respecto al día anterior. Por ejemplo, “+2.5%” o “-1.8%”.  
+
+
+
+## IMPORTANCIA:
+### **Relevancia económica**: 
+El oro ha sido una parte integral de la economía mundial durante milenios y sigue siendo relevante en la economía contemporánea por varias razones: El oro ha sido considerado tradicionalmente como una reserva de valor estable. A lo largo de la historia, ha conservado su valor mejor que muchas otras formas de inversión, lo que lo convierte en un refugio seguro en tiempos de incertidumbre económica, Los inversores y los bancos centrales a menudo mantienen oro como parte de una cartera diversificada. Dado que el oro tiene una correlación baja o negativa con otros activos. Además de su valor como inversión, el oro tiene numerosos usos industriales y tecnológicos. Se utiliza en la electrónica, la odontología, la medicina entre otros campos.  
+
+
+### **Análisis de tendencias**: 
+Estudiar la serie temporal de precios del oro permite identificar cambios en el sentimiento económico y la confianza del mercado. Por ejemplo, un aumento en el precio del oro a menudo indica preocupaciones sobre la inflación, la inestabilidad geopolítica o la incertidumbre económica, Para los inversionistas, el oro puede servir como una forma de diversificar sus carteras y mitigar el riesgo. Estudiar las fluctuaciones en su precio les permite ajustar sus asignaciones de activos según las condiciones del mercado. Históricamente ha demostrado ser un activo que puede actuar como cobertura contra la inflación. Los bancos, en particular, pueden estudiar las fluctuaciones en el precio del oro para informar sus decisiones de política monetaria y de inversión. Las reservas de oro de un banco central pueden influir en su política monetaria y en su capacidad para estabilizar la moneda nacional. Por último, : Los movimientos extremos en el precio del oro a menudo pueden indicar riesgos sistémicos en la economía o en los mercados financieros.  
+
+### **Modelos de predicción**: 
+Utilizando estos datos, se pueden construir modelos de predicción para estimar los precios futuros del oro y cambios importantes.  Se pueden aplicar modelos como: 
+
+•	***Modelos ARIMA (Autoregressive Integrated Moving Average):*** Son adecuados para series temporales estacionarias y pueden capturar tanto la autocorrelación como la estacionalidad en los datos.  
+
+•	***Suavizado exponencial:*** Modelo es útil para suavizar las fluctuaciones en los datos y capturar tendencias a largo plazo. Es especialmente útil cuando los datos tienen una tendencia y/o estacionalidad que cambia con el tiempo.  
+
+•	***Redes Neuronales Recurrentes (RNN) y Redes Neuronales Convolucionales (CNN):*** Estos modelos son capaces de capturar patrones complejos en los datos y pueden adaptarse a una amplia variedad de situaciones.  
+
+•	***Modelos de regresión:*** Son útiles para analizar la relación entre la serie temporal de interés y otras variables predictoras.  
+
+•	***Modelos de media móvil generalizada (GARCH):*** Son útiles para modelar la volatilidad en series temporales financieras.  
+
+
+### **Investigación académica**: 
+Los datos históricos del oro son útiles para investigaciones académicas en campos como la economía, las finanzas y la econometría.
+
+### **Granularidad diaria**: 
+El tener información tan detallada del comportamiento diario es valioso para tener datos solidos y de gran confiabilidad.
+
+<!--chapter:end:index.Rmd-->
+
+# Propuesta Avance 2
+
+## Cargar Librerias a usar
+```{r}
+library(lubridate) 
+library(forecast) 
+library(MLmetrics) 
+library(tseries) 
+library(TSstudio) 
+library(padr) 
+library(imputeTS)
+library(ggplot2)
+library(tidyverse)
+theme_set(theme_minimal())
+```
+## Cargar la data del Data set
+```{r}
+data = read.csv("Gold Price.csv")
+head(data)
+```
+## Limpieza de Datos
+```{r}
+# Validar los tipos de datos de cada Columna
+str(data)
+```
+La columna "Date" está en tipo "character", por lo tanto toca convertir esta en formato de Tiempo
+
+```{r}
+data <- data %>% 
+  mutate(Date = ymd(Date))
+
+str(data)
+```
+Todas las columnas se encuentran en el tipo correcto. 
+
+## Padding & imputation
+Si observamos la data solo comprende fechas entre semana, pero en series de tiempo deberiamos tener la data mas completa en la medida de lo posible.
+```{r}
+#Padding
+data <- data %>% 
+  pad(interval = "day") 
+
+# imputar NA values con la ultima observacion
+data_clean <- data %>% na.locf()
+
+head(data_clean)
+```
+## Exploración de la data
+Para explorar la data debemos primero crear el objeto de serie de tiempo
+```{r}
+# ts
+data_ts <- ts(data = data_clean$Price, start = 2014, frequency = 7*4*12)
+data_ts %>% 
+autoplot()
+```
+Se observa un comportamiento incremental a traves del tiempo y adicionalmente se podria inferir un modelo multiplicativo
+
+```{r}
+# Calcular el promedio móvil
+promedio_movil <- ma(data_ts, order = 12)  # Cambia el valor de 'order' según tus necesidades
+# Graficar la serie de tiempo y el promedio móvil por separado
+autoplot(data_ts) + ggtitle("Serie de Tiempo") +
+  autolayer(promedio_movil, series = "Promedio Móvil", col = "red")
+```
+
+Se puede apreciar que el promedio movil, sigue de cerca a la serie temporal indidcando que hay poco ruido en la variable y que se sigue una tendencia clara.
+## Descomposición
+Se realiza la descomposicion para validar la tendencia, estacionalidad.
+```{r}
+data_decompose <- data_ts %>% 
+  decompose(type = "multiplicative")
+  
+data_decompose %>% 
+  autoplot()
+```
+en efecto se evidencia una tendencia lineal y adicionalmente hay un patron de estacionalidad en la data
+
+## Análisis de estacionalidad
+
+```{r}
+data_decompose$seasonal %>% 
+  autoplot()
+```
+Se tratará de validar un patron mensual del precio de oro entre el 2014 y 2021
+
+```{r}
+data_clean %>% 
+  mutate(Month = month(Date, label = T)) %>% 
+  mutate(seasons = data_decompose$seasonal) %>% 
+  group_by(Month) %>% 
+  summarise(total = sum(seasons)) %>%   
+  ggplot(aes(Month, total)) +
+  geom_col()+
+  theme_minimal()
+```
+Los precios de oro tienden a ser mas altos entre enero a Julio, mierntas que agosto a diciembre el precio baja.
+
+<!--chapter:end:Capitulo-2.Rmd-->
+
+# Capítulo 3
+
+<!--chapter:end:Capitulo-3.Rmd-->
+
+# Capítulo 4
+
+<!--chapter:end:Capitulo-4.Rmd-->
+
